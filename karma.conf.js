@@ -2,7 +2,6 @@
 // Generated on Thu Jan 07 2016 10:40:12 GMT+0800 (SGT)
 
 module.exports = function (config) {
-
   // Example set of browsers to run on Sauce Labs
   // Check out https://saucelabs.com/platforms for all browser/platform combos
   var customLaunchers = {
@@ -34,9 +33,7 @@ module.exports = function (config) {
   config.set({
 
     sauceLabs: {
-      testName: 'Karma Test',
-      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-      startConnect: false
+      testName: 'Karma Test'
     },
     customLaunchers: customLaunchers,
 
@@ -65,31 +62,13 @@ module.exports = function (config) {
     },
 
     // Browserify configuration
-    // browserify: {
-    //   debug: true,
-    //   transform: [
-    //     ['babelify', {
-    //       'presets': ['es2015', 'stage-0']
-    //     }
-    //    ]
-    //   ]
-    // },
     browserify: {
       debug: true,
       transform: [
-        [
-          'babelify',
-          {
-            'presets': ['es2015', 'stage-0']
-          }
-        ], [
-          'browserify-istanbul',
-          {
-            instrumenterConfig: {
-              embedSource: true
-            }
-          }
-        ]
+        ['babelify', {
+          'presets': ['es2015', 'stage-0']
+        }
+       ]
       ]
     },
 
@@ -99,16 +78,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
-    // reporters: ['progress', 'mocha', 'coverage'],
-
-    coverageReporter: {
-      reporters: [
-            {type: 'html', dir: 'coverage'},
-            {type: 'lcov'},
-            {type: 'text'}
-      ]
-    },
+    reporters: ['progress', 'saucelabs'],
 
     // web server port
     port: 9876,
@@ -125,12 +95,11 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: process.env.CI ? Object.keys(customLaunchers) : ['Chrome', 'PhantomJS'],
+    browsers: Object.keys(customLaunchers),
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    // singleRun: true,
-    singleRun: process.env.CI,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
