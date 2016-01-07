@@ -34,7 +34,9 @@ module.exports = function (config) {
   config.set({
 
     sauceLabs: {
-      testName: 'Karma Test'
+      testName: 'Karma Test',
+      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+      startConnect: false
     },
     customLaunchers: customLaunchers,
 
@@ -97,8 +99,8 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    // reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
-    reporters: ['progress', 'mocha', 'coverage'],
+    reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
+    // reporters: ['progress', 'mocha', 'coverage'],
 
     coverageReporter: {
       reporters: [
