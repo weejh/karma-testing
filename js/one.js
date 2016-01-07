@@ -1,3 +1,3 @@
-export function num () {
+module.exports = function () {
   return 1
 }

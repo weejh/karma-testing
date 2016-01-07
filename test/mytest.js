@@ -23,13 +23,13 @@
 // })
 //
 
-// import num from '../js/one'
-//
-// describe('Num', () => {
-//   it('should return 1', () => {
-//     assert.equal(num(), 1)
-//   })
-// })
+var num = require('../js/one')
+
+describe('Num', () => {
+  it('should return 1', () => {
+    assert.equal(num(), 1)
+  })
+})
 
 describe('Array', () => {
   describe('#indexOf()', () => {

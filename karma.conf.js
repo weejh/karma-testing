@@ -62,14 +62,18 @@ module.exports = function (config) {
     },
 
     // Browserify configuration
+    // browserify: {
+    //   debug: true,
+    //   transform: [
+    //     ['babelify', {
+    //       'presets': ['es2015', 'stage-0']
+    //     }
+    //    ]
+    //   ]
+    // },
     browserify: {
       debug: true,
-      transform: [
-        ['babelify', {
-          'presets': ['es2015', 'stage-0']
-        }
-       ]
-      ]
+      transform: ['babelify']
     },
 
     // The rest of your karma config is here
