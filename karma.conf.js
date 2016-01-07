@@ -73,7 +73,10 @@ module.exports = function (config) {
     // },
     browserify: {
       debug: true,
-      transform: ['babelify']
+      transform: [
+        ['babelify'],
+        ['browserify-istanbul', { instrumenterConfig: { embedSource: true } }]
+      ]
     },
 
     // The rest of your karma config is here
@@ -82,7 +85,16 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'saucelabs'],
+    // reporters: ['progress', 'saucelabs'],
+    reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
+
+    coverageReporter: {
+      reporters: [
+        {type: 'html', dir: 'coverage'},
+        {type: 'lcov'},
+        {type: 'text'}
+      ]
+    },
 
     // web server port
     port: 9876,
@@ -99,7 +111,8 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: Object.keys(customLaunchers),
+    // browsers: Object.keys(customLaunchers),
+    browsers: process.env.CI ? Object.keys(customLaunchers) : ['Chrome'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
