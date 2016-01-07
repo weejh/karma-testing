@@ -62,7 +62,7 @@ module.exports = function (config) {
       'test/**/*.js': ['browserify']
     },
 
-    //Browserify configuration
+    // Browserify configuration
     browserify: {
       debug: true,
       transform: [
@@ -76,11 +76,18 @@ module.exports = function (config) {
     // The rest of your karma config is here
     // ...
 
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'saucelabs'],
+    reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
+
+    coverageReporter: {
+      reporters: [
+            {type: 'html', dir: 'coverage'},
+            {type: 'lcov'},
+            {type: 'text'}
+      ]
+    },
 
     // web server port
     port: 9876,
@@ -101,7 +108,8 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    // singleRun: true,
+    singleRun: process.env.CI,
 
     // Concurrency level
     // how many browser should be started simultaneous
