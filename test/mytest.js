@@ -1,3 +1,5 @@
+/* global  assert should describe it expect */
+
 // var assert = require('assert')
 //
 // describe("A suite is just a function", function() {

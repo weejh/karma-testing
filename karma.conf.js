@@ -63,13 +63,31 @@ module.exports = function (config) {
     },
 
     // Browserify configuration
+    // browserify: {
+    //   debug: true,
+    //   transform: [
+    //     ['babelify', {
+    //       'presets': ['es2015', 'stage-0']
+    //     }
+    //    ]
+    //   ]
+    // },
     browserify: {
       debug: true,
       transform: [
-        ['babelify', {
-          'presets': ['es2015', 'stage-0']
-        }
-       ]
+        [
+          'babelify',
+          {
+            'presets': ['es2015', 'stage-0']
+          }
+        ], [
+          'browserify-istanbul',
+          {
+            instrumenterConfig: {
+              embedSource: true
+            }
+          }
+        ]
       ]
     },
 
