@@ -79,7 +79,8 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
+    // reporters: process.env.CI ? ['dots', 'saucelabs', 'coverage'] : ['progress', 'coverage'],
+    reporters: ['progress', 'mocha', 'coverage'],
 
     coverageReporter: {
       reporters: [
@@ -104,7 +105,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: process.env.CI ? Object.keys(customLaunchers) : ['Chrome'],
+    browsers: process.env.CI ? Object.keys(customLaunchers) : ['Chrome', 'PhantomJS'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
